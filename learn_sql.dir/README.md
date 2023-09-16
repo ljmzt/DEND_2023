@@ -49,7 +49,7 @@ Some of the steps listed below follow [gwangjinkim's github](https://gist.github
   ```
     pg_ctl stop -D postgres_cluster.dir
   ```
-- Some useful commands once you get inside psql are:
+- Some useful commands once you get inside psql are:  
 -- \q: quit  
 -- \l: list of databases  
 -- \du: list of roles (i.e. users in older terminology)  
