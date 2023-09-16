@@ -13,7 +13,7 @@ for i in range(n):
     x.append((i, random.random()))
 random.shuffle(x)
 
-conn = psycopg2.connect('postgresql://zma@localhost/student_db')
+conn = psycopg2.connect('postgresql://student:student@localhost/student_db')
 conn.set_session(autocommit=True)
 cur = conn.cursor()
 
@@ -23,7 +23,7 @@ with open('tmp_input.txt','w') as fid:
     for id, val in x:
         fid.write(f"{str(id)}|{str(val)}\n")
 print(f'write to file then copy into {datetime.now()}')
-cur.execute("COPY tmp FROM '/Users/zma/Documents/DEND-2023.dir/learn_sql.dir/tmp_input.txt' DELIMITER '|'")
+cur.execute(f"COPY tmp FROM '{os.path.join(os.getcwd(), 'tmp_input.txt')}' DELIMITER '|'")
 print(f'end {datetime.now()}')
 cur.execute('SELECT * FROM tmp LIMIT 5')
 print(cur.fetchall())

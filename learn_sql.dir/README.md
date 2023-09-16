@@ -53,9 +53,9 @@ Some of the steps listed below follow [gwangjinkim's github](https://gist.github
 -- \q: quit
 -- \l: list of databases
 -- \du: list of roles (i.e. users in older terminology)
--- \d: list relations (i.e. tables)
+-- \d or \dt: list relations (i.e. tables)
 -- \d table name: list columns of this table
-
+-- \dn: list of schemas
 It's actually funny that there's no file called student_db.db in the system, it got broken down to whole bunch of strange files, see [this](https://stackoverflow.com/questions/5052907/location-of-postgresql-database-on-os-x)
 
 ### Connect to the server from other applications

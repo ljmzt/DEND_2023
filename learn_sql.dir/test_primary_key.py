@@ -19,9 +19,10 @@ random.shuffle(x)
 with open('tmp_input.txt','w') as fid:
     for id, val in x:
         fid.write(f"{str(id)}|{str(val)}\n")
+input_file = os.path.join(os.getcwd(), 'tmp_input.txt')
 
 # create connection
-conn = psycopg2.connect('postgresql://zma@localhost/student_db')
+conn = psycopg2.connect('postgresql://student:student@localhost/student_db')
 conn.set_session(autocommit=True)
 cur = conn.cursor()
 
@@ -30,11 +31,7 @@ print('for table without primary key')
 cur.execute('DROP TABLE IF EXISTS large_no_primary_key')
 cur.execute('CREATE TABLE large_no_primary_key (id int, val float)')
 print(f"start inserting {datetime.now()}")
-cur.execute('''
-COPY large_no_primary_key 
-FROM '/Users/zma/Documents/DEND-2023.dir/learn_sql.dir/tmp_input.txt'
-DELIMITER '|'
-''')
+cur.execute(f"COPY large_no_primary_key FROM '{input_file}' DELIMITER '|'")
 print(f"end inserting {datetime.now()}")
 
 # insert into table with primary key
@@ -42,11 +39,7 @@ print('for table with primary key')
 cur.execute('DROP TABLE IF EXISTS large_with_primary_key')
 cur.execute('CREATE TABLE large_with_primary_key (id int PRIMARY KEY, val float)')
 print(f"start inserting {datetime.now()}")
-cur.execute('''
-COPY large_with_primary_key 
-FROM '/Users/zma/Documents/DEND-2023.dir/learn_sql.dir/tmp_input.txt'
-DELIMITER '|'
-''')
+cur.execute(f"COPY large_with_primary_key FROM '{input_file}' DELIMITER '|'")
 print(f"end inserting {datetime.now()}")
 
 # now create a short table to test joint
