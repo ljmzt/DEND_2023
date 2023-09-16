@@ -84,13 +84,13 @@ CREATE TABLE accounts (
   )
 ```
 
-and want to commit this transaction which transfer money from Alice's account to Bobs:
+and want to commit this transaction which transfers money from Alice's account to Bob's:
 ```
 UPDATE accounts SET balance = balance + 50 WHERE name = 'Bob'
 UPDATE accounts SET balance = balance - 50 WHERE name = 'Alice'
 ```
 
-Say Alice only has 80 dollars in her account, only 1 transaction can be made. If I want to make 2 transactions, the second one will fail and won't transfer money to Bob's account even the update command on Bob's account occurs before the update on Alice's. 
+Say Alice only has 80 dollars in her account, then only 1 transaction can be made. If I want to make 2 transactions, the second one will fail (because Alice's balance will be -20) and won't transfer money to Bob's account even the update command on Bob's account occurs before the update on Alice's. 
 
 I use asyncio to simulate two transactions, one happens slightly after another. For asyncio, please see [this](https://realpython.com/async-io-python/). Strictly speaking, it's not modeling concurrent transactions, but instead modeling a sequence of two transactions. But for testing, I think it's enough. 
 
