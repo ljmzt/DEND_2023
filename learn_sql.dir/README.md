@@ -10,7 +10,6 @@ Some of the steps listed below follow [gwangjinkim's github](https://gist.github
   ```
     initdb -D postgres_cluster.dir
   ```
-          
    
   Note that although the command is called initdb,  it actually means starting a cluster, see [here](https://www.postgresql.org/docs/current/app-initdb.html). 
   The cluster will have you as a superuser with username the same as your system username. It also makes a folder and put some initial conf files in it. I kept the files unchanged and just used the default settings.
