@@ -10,8 +10,8 @@ async def alter(sleep_sec=1.0):
         cur = conn.cursor()
         # it actually hangs if I put the await between the two update!!
         await asyncio.sleep(sleep_sec)
-        cur.execute("UPDATE accounts SET balance = balance - 50 WHERE name = 'Alice'")
         cur.execute("UPDATE accounts SET balance = balance + 50 WHERE name = 'Bob'")
+        cur.execute("UPDATE accounts SET balance = balance - 50 WHERE name = 'Alice'")
         conn.commit()
     except psycopg2.DatabaseError as e:
         print(f"fail for sleep_sec={sleep_sec}")

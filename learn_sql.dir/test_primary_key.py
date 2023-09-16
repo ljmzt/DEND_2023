@@ -1,7 +1,8 @@
 # for n=1e+7
 # inserting into table without primary key takes about 12 sec
-# inserting into table with ''' takes about 63 sec
-# join into the table without primary key takes about 3.4 sec
+# inserting into table with ''' takes about 60 sec
+# for a short table n=1e+4
+# join into this table without primary key takes about 3 sec
 # ''' with primary key takes < 0.1 sec
 import random
 import psycopg2

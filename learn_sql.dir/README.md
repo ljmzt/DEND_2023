@@ -56,6 +56,42 @@ Some of the steps listed below follow [gwangjinkim's github](https://gist.github
 -- \d or \dt: list relations (i.e. tables)
 -- \d table name: list columns of this table
 -- \dn: list of schemas
-It's actually funny that there's no file called student_db.db in the system, it got broken down to whole bunch of strange files, see [this](https://stackoverflow.com/questions/5052907/location-of-postgresql-database-on-os-x)
+-- \dtvs public.*: list everything (table, view and sequences) in public schema; the public schema is the default schema that all the created tables, views etc will go to.
 
-### Connect to the server from other applications
+It's actually funny that there's no file called student_db.db in the system, it got broken down to whole bunch of strange files, see [this](https://stackoverflow.com/questions/5052907/location-of-postgresql-database-on-os-x).
+
+### Test 1: Compare Copy vs Insert (test_insert_vs_copy.py)
+It is fairly obvious that one needs to use COPY instead of INSERT when dealing with large data set. This file shows that copying a n=1e+5 txt file that has only two columns (id and val) into a table takes ~0.1s when using COPY and ~13s when using INSERT.
+
+NOTE: to make the COPY works, one needs to grant the user (student) privilage to read server side file:
+```
+GRANT pg_read_server_files TO student;
+```
+
+### Test 2: Join with and without primary key (test_primary_key.py)
+I am curious how much faster it can be to do a join with and without primary key. The idea is that, say I use where table1.id = table2.id, if table2.id is the primary key, it won't do a whole table scan, but can directly find the table2.id.
+
+To test this, I generated an n=1e+7 table. Inserting into table without primary key takes about 12 sec. Inserting into table with primary takes about 60 sec. Then I generated a shorter table with n=1e+4. Join into this table without primary key takes about 3 sec and takes < 0.1 sec with primary key, which is **REALLY** fast.
+
+### Test 3: Transaction (test_transaction.py)
+Transaction is an interesting property in database (see [this](https://www.postgresql.org/docs/16/tutorial-transactions.html) for reference).
+
+Suppose we have this table accounts with a constraint on balance:
+```
+CREATE TABLE accounts (
+  name text, 
+  balance real CHECK (balance >= 0)
+  )
+```
+
+and want to commit this transaction which transfer money from Alice's account to Bobs:
+```
+UPDATE accounts SET balance = balance + 50 WHERE name = 'Bob'
+UPDATE accounts SET balance = balance - 50 WHERE name = 'Alice'
+```
+
+Say Alice only has 80 dollars in her account, only 1 transaction can be made. If I want to make 2 transactions, the second one will fail and won't transfer money to Bob's account even the update command on Bob's account occurs before the update on Alice's. 
+
+I use asyncio to simulate two transactions, one happens slightly after another. For asyncio, please see [this](https://realpython.com/async-io-python/). Strictly speaking, it's not modeling concurrent transactions, but instead modeling a sequence of two transactions. But for testing, I think it's enough. 
+
+The code shows that the later transaction indeed fails and rolls back to the beginning without adding money to Bob's account.
