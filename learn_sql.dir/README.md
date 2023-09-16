@@ -28,7 +28,7 @@ Some of the steps listed below follow [gwangjinkim's github](https://gist.github
   ```
   The createuser command will ask for a password. For demonstration, I am using "student" for now. To actually make it authenticate the password if you are connecting from local, you need to change the method from "trust" to "md5" in the file pg_hba.conf. Please see [here](https://stackoverflow.com/questions/38954123/postgresqls-psql-exe-doesnt-validate-password) for details. 
   NOTE: if you want to change the authentication method, please make absolutely sure you have updated your superuser password first, as that was set to some default value which nobody knows. If that happens, please see [this](https://chartio.com/resources/tutorials/how-to-set-the-default-user-password-in-postgresql/), and it's an infinite pain to fix.
-- Test connection
+- Test connection  
   Now you should be able to use psql to connect to the database by using:
   ```
     psql -h localhost -U student -d student_db
