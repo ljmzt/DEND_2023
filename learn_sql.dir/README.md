@@ -99,3 +99,6 @@ The code shows that the later transaction indeed fails and rolls back to the beg
 ### Things to do
 1. Explain query, some hints [here](https://courses.cs.washington.edu/courses/csep544/11au/resources/postgresql-instructions.html#:~:text=Getting%20a%20PostgreSQL%20command%20prompt,-You%20need%20to&text=You%20can%20get%20a%20command,username%20of%20the%20database%20superuser.)
 2. Deal with JSON, from official document [here](https://www.postgresql.org/docs/9.5/functions-json.html) and [here](https://www.postgresql.org/docs/current/datatype-json.html), an introduction about copying from JSON into database from [here](https://konbert.com/blog/import-json-into-postgres-using-copy).
+
+### NOTES:
+If you would like to use ipython-sql, the default conda installation will install sqlalchemy=2.0, which doesn't work on my mac and complains about having "bind" in the metadata argument. Installing sqlalchemy=1.4.39 works fine.
