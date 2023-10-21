@@ -96,7 +96,7 @@ I use asyncio to simulate two transactions, one happens slightly after another. 
 
 The code shows that the later transaction indeed fails and rolls back to the beginning without adding money to Bob's account.
 
-### test 4: timestamp
+### test 4: test_timestamp
 This tries to understand how to go from json to timestamp. Unlike redshift, I need to copy into jsonb type then uses to_timestamp function.
 
 ### Things to do
