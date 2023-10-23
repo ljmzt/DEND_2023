@@ -49,8 +49,8 @@ sql_queries: contain all the SQL queries used in the python codes
 FROM stl_loaderror_detail`. This is how I catch the TEXT data type problem mentioned in 1.
 
 ### Dependencies
-psycopg2==2.9.3
-boto3==1.26.76
-sqlalchemy==1.4.39  (anything more recent than this breaks on my mac)
-ipython-sql==0.3.9
-python==3.11.5
+psycopg2==2.9.3   
+boto3==1.26.76   
+sqlalchemy==1.4.39  (anything more recent than this breaks on my mac)   
+ipython-sql==0.3.9   
+python==3.11.5   
