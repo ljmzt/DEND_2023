@@ -6,18 +6,19 @@ Sparkify is a simulated on-line song service, which generates log files document
 ### Table Design
 
 These are the project description about analytic tables:  
+
 **Fact Table**   
-1. songplays - records in event data associated with song plays i.e. records with page NextSong
+1. songplays - records in event data associated with song plays i.e. records with page NextSong   
 songplay_id, start_time, user_id, level, song_id, artist_id, session_id, location, user_agent
 
 **Dimension Tables**
 2. users - users in the app   
-user_id, first_name, last_name, gender, level
+user_id, first_name, last_name, gender, level  
 3. songs - songs in music database   
-song_id, title, artist_id, year, duration
+song_id, title, artist_id, year, duration   
 4. artists - artists in music database   
-artist_id, name, location, latitude, longitude
-5. time - timestamps of records in songplays broken down into specific units   
+artist_id, name, location, latitude, longitude   
+5. time - timestamps of records in songplays broken down into specific units    
 start_time, hour, day, week, month, year, weekday
 
 For the staging tables: stage_logdata and stage_songdata, since we will do a join on song title to produce the fact_songplays table, we use song title as distkey.
