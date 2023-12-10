@@ -24,7 +24,7 @@ NOTE: There are way too many json files for songs. So I only uploaded the ones s
 ### Dag
 The Dag is as followed:
 
-![](airflow.png)
+![](./airflow.png)
 
 From left to right, the tasks are:
 1. Drop tables if they exist for reproducibility.
