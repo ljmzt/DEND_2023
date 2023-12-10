@@ -34,6 +34,9 @@ From left to right, the tasks are:
 5. Insert into the dim tables.
 6. Run data quality check
 
+### NOTE on data quality check
+In the project rubric, is says "The operator raises an error if the check fails pass". However, I don't think it is better to log the failures then humanly check them. Rerun the ETL a few times doesn't feel will solve any issues.
+
 ### Dependencies
 apache-airflow=2.7.3
 google-re2=1.1
